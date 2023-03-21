@@ -2,7 +2,8 @@ const Character = require('../models/character')
 const mongoose = require('mongoose')
 
 const getCharacters = async(req, res) => {
-    const characters = await Character.find({}).sort({createdAt: -1})
+    const user_id = req.user._id
+    const characters = await Character.find({ user_id }).sort({createdAt: -1})
 
     res.status(200).json(characters)
 }
@@ -41,7 +42,8 @@ const createCharacter = async(req, res) => {
     }
 
     try {
-        const character = await Character.create({ name, hometown })
+        const user_id = req.user._id
+        const character = await Character.create({ name, hometown, user_id })
         res.status(200).json(character)
     } catch (error) {
         res.status(400).json({error: error.message})

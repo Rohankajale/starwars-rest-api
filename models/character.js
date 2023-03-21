@@ -8,6 +8,10 @@ const characterSchema = mongoose.Schema({
     hometown: {
         type: String,
         require:true
+    },
+    user_id: {
+        type: String,
+        required: true
     }
 }, {timestamps: true})
 
