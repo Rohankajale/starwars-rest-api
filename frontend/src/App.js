@@ -6,19 +6,18 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './componenets/Navbar'
 import Home from './pages/Home';
 
-class App extends Component {
-  render() {
+function App() {
   return (
-    <Router>
-      <div className="App">
+    <div className="App">
+      <Router>
         <Navbar />
         <Routes>
           <Route path = '/' element = {<Home />}></Route>
         </Routes>
-      </div>
-   </Router>
+      </Router>
+    </div>
   );
  }
-}
+
 
 export default App;

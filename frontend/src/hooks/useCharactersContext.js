@@ -5,7 +5,7 @@ export const useCharactersContext = () => {
     const context = useContext(CharactersContext)
 
     if(!context) {
-        throw error('Context tttt')
+        throw Error('Context tttt')
     }
 
     return context

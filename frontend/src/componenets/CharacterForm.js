@@ -34,13 +34,14 @@ const CharacterForm = () => {
             setError(null)
             setName('')
             setHometown('')
-            dispatch({ type: CREATE_CHARAACTER, payload: json })
+            dispatch({ type: CREATE_CHARACTER, payload: json })
         }
     }
     return (
-        <form>
+        <form className="create" onSubmit={ handleSubmit }>
             <h3>Add Character</h3>
 
+            <label>Name</label>
             <input 
             type = "text"
             onChange = { (e) => setName(e.target.value) }
@@ -48,6 +49,7 @@ const CharacterForm = () => {
             className = { emptyfields.include('name') ? error : '' }
             />
 
+            <label>HomeTown</label>
             <input
             type = "text"
             onChange = { (e) => setHometown(e.target.value) }
