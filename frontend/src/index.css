@@ -1,5 +1,5 @@
 :root {
-  --primary: #1aac83;
+  --primary: teal;
   --error: #e7195a;
 }
 body {
@@ -28,7 +28,6 @@ header a {
   margin: 0 auto;
 }
 
-/* homepage */
 .home {
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -37,7 +36,7 @@ header a {
 .character-details {
   background: #fff;
   border-radius: 4px;
-  margin: 20px auto;
+  margin: 20px 20px;
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
@@ -80,10 +79,22 @@ form button {
   border: 0;
   color: #fff;
   padding: 10px;
-  font-family: "Poppins";
+  font-family: monospace;
   border-radius: 4px;
   cursor: pointer;
 }
+
+form button:hover{
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.24),
+              0 11px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: teal;
+}
+
+form button:active{
+  box-shadow: 0 5px rgb(0, 174, 255);
+  transform: translateY(4px);
+}
+
 div.error {
   padding: 10px;
   background: #ffefef;
