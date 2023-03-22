@@ -1,8 +1,8 @@
-import useState from 'react'
-import useCharactersContext from './hooks/useCharactersContext'
+import {useState} from 'react'
+import useCharactersContext from '../hooks/useCharactersContext'
 
 const CharacterForm = () => {
-    const dispatch = useCharactersContext()
+    const {dispatch} = useCharactersContext()
 
     const [name, setName] = useState('')
     const [hometown, setHometown] = useState('')
@@ -34,7 +34,7 @@ const CharacterForm = () => {
             setError(null)
             setName('')
             setHometown('')
-            dispatch({ type: CREATE_CHARACTER, payload: json })
+            dispatch({ type: 'CREATE_CHARACTER', payload: json })
         }
     }
     return (
@@ -46,7 +46,7 @@ const CharacterForm = () => {
             type = "text"
             onChange = { (e) => setName(e.target.value) }
             value = { name }
-            className = { emptyfields.include('name') ? error : '' }
+            className = { emptyfields.includes('name') ? error : '' }
             />
 
             <label>HomeTown</label>
@@ -54,10 +54,10 @@ const CharacterForm = () => {
             type = "text"
             onChange = { (e) => setHometown(e.target.value) }
             value = { hometown }
-            className = { emptyfields.include('hometown') ? error : '' }
+            className = { emptyfields.includes('hometown') ? error : '' }
             />
 
-            <button>Add Character</button>
+            <button onClick={handleSubmit}>Add Character</button>
             {error && <div className="error">{ error }</div>}
         </form>
     )

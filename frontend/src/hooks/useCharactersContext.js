@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CharactersContext } from "../context/CharactersContext";
 
-export const useCharactersContext = () => {
+const useCharactersContext = () => {
     const context = useContext(CharactersContext)
 
     if(!context) {
@@ -12,5 +12,5 @@ export const useCharactersContext = () => {
 
 }
 
-
+export default useCharactersContext
 

@@ -22,9 +22,9 @@ export const charactersReducer = (state, action) => {
 }
 
 export const CharactersContextProvider = ({ children }) => {
-    const[state, dispatch] = useReducer(charactersReducer)< {
+    const[state, dispatch] = useReducer(charactersReducer, {
         characters: null
-    }
+    })
 
     return (
         <CharactersContext.Provider value={{ ...state, dispatch }}>

@@ -1,19 +1,19 @@
-import { useCharactersContext } from '../hooks/useCharactersContext'
+import useCharactersContext from '../hooks/useCharactersContext'
 
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
-const CharacterDetails = () => {
+const CharacterDetails = ({ character }) => {
     const { dispatch } = useCharactersContext
 
-    const handleClick = async() => {
+    const handleClick = async () => {
         const response = await fetch ('/api/characters' + character._id, {
             method: 'DELETE'
         })
 
-    const json = await response.json()
-    if(response.ok) {
-        dispatch({ type: DELETE_CHARACTER, payload: json })
-    }
+        const json = await response.json()
+        if(response.ok) {
+            dispatch({ type: 'DELETE_CHARACTER', payload: json })
+        }
     }
 
     return (

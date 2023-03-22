@@ -9,10 +9,10 @@ const characterSchema = mongoose.Schema({
         type: String,
         require:true
     },
-    user_id: {
-        type: String,
-        required: true
-    }
+    // user_id: {
+    //     type: String,
+    //     required: true
+    // }
 }, {timestamps: true})
 
 module.exports = mongoose.model('Character', characterSchema) 

@@ -1,24 +1,24 @@
 import { useEffect } from "react"
-import useCharactersContext from './hooks/useCharactersContext'
+import useCharactersContext from "../hooks/useCharactersContext"
 
 import CharacterForm from "../componenets/CharacterForm"
 import CharacterDetails from "../componenets/CharacterDetails"
 
 const Home = () => {
-    const { characters, dispatch } = useCharactersContext
+    const { characters, dispatch } = useCharactersContext()
 
     useEffect(() => {
-        const fetchCharacters = async() => {
+        const fetchCharacters = async () => {
             const response= await fetch('/api/characters')
             const json = await response.json()
 
-            if(response.ok) {
-                dispatch({ type: SET_CHARACTER, payload:json })
+            if (response.ok) {
+                dispatch({ type: 'SET_CHARACTERS', payload: json })
             }
         }
 
         fetchCharacters()
-    }, [dispatch])
+    }, [ dispatch ]) 
 
     return (
         <div className = "home">
@@ -32,9 +32,5 @@ const Home = () => {
     )
 }
 
-
-
-
-
-
 export default Home
+
