@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import useCharactersContext from "../hooks/useCharactersContext"
 
 import CharacterForm from "../componenets/CharacterForm"
@@ -12,9 +12,10 @@ const Home = () => {
             const response= await fetch('/api/characters')
             const json = await response.json()
 
-            if (response.ok) {
-                dispatch({ type: 'SET_CHARACTERS', payload: json })
+            if (!response.ok) {
+                return
             }
+            dispatch({ type: 'SET_CHARACTERS', payload: json })
         }
 
         fetchCharacters()

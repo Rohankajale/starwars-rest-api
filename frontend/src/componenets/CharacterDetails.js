@@ -18,8 +18,8 @@ const CharacterDetails = ({ character }) => {
 
     return (
         <div className="character-details">
-        <h4>character.name</h4>
-        <p><strong>HomeTown</strong>character.hometown</p>
+        <h4>{ character.name }</h4>
+        <p><strong>HomeTown</strong>{ character.hometown }</p>
         <p>{formatDistanceToNow(new Date(character.createdAt), { addSuffix: true })}</p>
         <span className="material-symbols-outlined" onClick={ handleClick }>delete</span>
         </div>
