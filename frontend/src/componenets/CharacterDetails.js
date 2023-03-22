@@ -3,10 +3,10 @@ import useCharactersContext from '../hooks/useCharactersContext'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const CharacterDetails = ({ character }) => {
-    const { dispatch } = useCharactersContext
+    const { dispatch } = useCharactersContext()
 
     const handleClick = async () => {
-        const response = await fetch ('/api/characters' + character._id, {
+        const response = await fetch (`/api/characters/${ character._id }`, {
             method: 'DELETE'
         })
 
@@ -19,7 +19,7 @@ const CharacterDetails = ({ character }) => {
     return (
         <div className="character-details">
         <h4>{ character.name }</h4>
-        <p><strong>HomeTown</strong>{ character.hometown }</p>
+        <p><strong>HomeTown: </strong>{ character.hometown }</p>
         <p>{formatDistanceToNow(new Date(character.createdAt), { addSuffix: true })}</p>
         <span className="material-symbols-outlined" onClick={ handleClick }>delete</span>
         </div>

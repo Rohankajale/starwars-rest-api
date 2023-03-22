@@ -14,7 +14,7 @@ export const charactersReducer = (state, action) => {
             } 
         case 'DELETE_CHARACTER':
             return {
-                characters: state.characters.filter(c => c._id !== action.payload._id)
+                characters: state.characters.filter((character) => character._id !== action.payload._id)
             }
         default:
             return state
