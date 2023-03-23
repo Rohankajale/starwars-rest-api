@@ -15,6 +15,7 @@ const Home = () => {
             if (!response.ok) {
                 return
             }
+            console.log(json);
             dispatch({ type: 'SET_CHARACTERS', payload: json })
         }
 

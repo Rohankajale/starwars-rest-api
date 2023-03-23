@@ -1,45 +1,55 @@
 import {useState} from 'react'
 import useCharactersContext from '../hooks/useCharactersContext'
+import useCreateCharacter from '../hooks/useCreateCharacter'
+
 
 const CharacterForm = () => {
     const {dispatch} = useCharactersContext()
+
+    const { error, isLoading, createCharacter } = useCreateCharacter()
 
     const [name, setName] = useState('')
     const [hometown, setHometown] = useState('')
     const [img, setImg] = useState(null)
     const [imgPath, setImgPath] = useState('')
-    const [error, setError] = useState(null)
+    // const [error, setError] = useState(null)
     const [emptyfields, setEmptyFields] = useState([])
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const character = {name, hometown, img}
+        // const character = {name, hometown, img}
 
-        const response = await fetch('/api/characters', {
-            method: 'POST',
-            body: JSON.stringify(character),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+        // const response = await fetch('/api/characters', {
+        //     method: 'POST',
+        //     body: JSON.stringify(character),
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
+        const success = createCharacter(name, hometown, img)
+        // const json = await response.json()
 
-        const json = await response.json()
-
-        if(!response.ok) {
-            setError(json.error)
-            setEmptyFields(json.emptyfields)
-        }
-        if(response.ok) {
-            setEmptyFields([])
-            setError(null)
+        if(success) {
             setName('')
             setHometown('')
             setImg(null)
-            setImgPath('')
-            dispatch({ type: 'CREATE_CHARACTER', payload: json })
+            setImgPath ('')
         }
+        // if(!response.ok) {
+        //     // setError(json.error)
+        //     setEmptyFields(json.emptyfields) 
+        // }
+        // if(response.ok) {
+        //     setEmptyFields([])
+        //     // setError(null)
+        //     setName('')
+        //     setHometown('')
+        //     setImg(null)
+        //     setImgPath('')
+        //     dispatch({ type: 'CREATE_CHARACTER', payload: json })
+        // }
     }
     return (
         <form className="create" onSubmit={ handleSubmit }>
@@ -72,7 +82,7 @@ const CharacterForm = () => {
             
             />
 
-            <button onClick={handleSubmit}>Add Character</button>
+            <button onClick={handleSubmit} disabled = { isLoading }>Add Character</button>
             {error && <div className="error">{ error }</div>}
         </form>
     )
