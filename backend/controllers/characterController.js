@@ -1,5 +1,6 @@
 const Character = require('../models/character')
 const mongoose = require('mongoose')
+const fs = require('fs')
 
 const getCharacters = async(req, res) => {
     // const user_id = req.user._id
@@ -25,30 +26,50 @@ const getCharacter = async(req, res) => {
 }
 
 const createCharacter = async(req, res) => {
-    const { name, hometown } = req.body
-
-    let emptyFields = []
-
-    if(!name) {
-        emptyFields.push('name')
+    const characterObj = {
+        name: req.body.name,
+        hometown: req.body.hometown,
+        img: {
+            data: fs.readFileSync('./uploads/' + req.file.filename),
+            contentType: 'image/jpg'
+        }
     }
 
-    if(!hometown) {
-        emptyFields.push('hometown')
-    }
+    const character = await Character.create(characterObj)
 
-    if(emptyFields.length > 0) {
-        return res.status(400).json({error: 'Fields :)'})
+    if(character) {
+       res.status(200).json(character)
     }
+    else {
+        res.status(400).json({ error: 'Fields {X}' })
+    }
+    fs.rmSync(('./uploads/' + req.file.filename))
 
-    try {
-        // const user_id = req.user._id
-        // const character = await Character.create({ name, hometown, user_id })
-        const character = await Character.create({ name, hometown })
-        res.status(200).json(character)
-    } catch (error) {
-        res.status(400).json({error: error.message})
-    }
+    
+    // let emptyFields = []
+
+    // if(!name) {
+    //     emptyFields.push('name')
+    // }
+
+    // if(!hometown) {
+    //     emptyFields.push('hometown')
+    // }
+
+    // if(emptyFields.length > 0) {
+    //     return res.status(400).json({error: 'Fields :)'})
+    // }
+
+    // try {
+    //     // const user_id = req.user._id
+    //     // const character = await Character.create({ name, hometown, user_id })
+    //     const character = await Character.create({ name, hometown })
+    //     res.status(200).json(character)
+    // } catch (error) {
+    //     res.status(400).json({error: error.message})
+    // }
+
+
 }
 
 const updateCharacter = async(req, res) => {

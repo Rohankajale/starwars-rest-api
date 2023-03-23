@@ -6,6 +6,8 @@ const CharacterForm = () => {
 
     const [name, setName] = useState('')
     const [hometown, setHometown] = useState('')
+    const [img, setImg] = useState(null)
+    const [imgPath, setImgPath] = useState('')
     const [error, setError] = useState(null)
     const [emptyfields, setEmptyFields] = useState([])
 
@@ -13,7 +15,7 @@ const CharacterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const character = {name, hometown}
+        const character = {name, hometown, img}
 
         const response = await fetch('/api/characters', {
             method: 'POST',
@@ -34,6 +36,8 @@ const CharacterForm = () => {
             setError(null)
             setName('')
             setHometown('')
+            setImg(null)
+            setImgPath('')
             dispatch({ type: 'CREATE_CHARACTER', payload: json })
         }
     }
@@ -55,6 +59,17 @@ const CharacterForm = () => {
             onChange = { (e) => setHometown(e.target.value) }
             value = { hometown }
             className = { emptyfields.includes('hometown') ? error : '' }
+            />
+
+            <label>Upload:</label>
+            <input
+            type = "file"
+            onChange = { (e) => { 
+                setImg(e.target.files[0])
+                setImgPath(e.target.value) 
+            }}
+            value = { imgPath }
+            
             />
 
             <button onClick={handleSubmit}>Add Character</button>

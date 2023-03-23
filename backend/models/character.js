@@ -1,6 +1,6 @@
 const mongoose =require('mongoose')
 
-const characterSchema = mongoose.Schema({
+const characterSchema = new mongoose.Schema({
     name: {
         type: String,
         require: true
@@ -9,6 +9,10 @@ const characterSchema = mongoose.Schema({
         type: String,
         require:true
     },
+    img: {
+        data: Buffer,
+        contentType: String
+    }
     // user_id: {
     //     type: String,
     //     required: true

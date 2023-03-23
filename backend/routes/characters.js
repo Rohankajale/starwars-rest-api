@@ -6,7 +6,7 @@ const {
     updateCharacter,
     deleteCharacter
 } = require('../controllers/characterController')
-
+const upload = require('../middleware/imageMiddleware')
 // const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
@@ -17,7 +17,7 @@ router.get('/', getCharacters)
 
 router.get('/:id', getCharacter)
 
-router.post('/', createCharacter)
+router.post('/', upload.single('image'), createCharacter)
 
 router.patch('/:id', updateCharacter)
 
