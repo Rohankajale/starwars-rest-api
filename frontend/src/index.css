@@ -34,6 +34,8 @@ header a {
   gap: 100px;
 }
 .character-details {
+  display: flex;
+  flex-direction: column;
   background: #fff;
   border-radius: 4px;
   margin: 20px 20px;
