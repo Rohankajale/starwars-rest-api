@@ -51,7 +51,7 @@ header a {
 .character-details h4 {
   font-weight: bolder;
   margin: 0 0 10px 0;
-  font-size: 2.2em;
+  font-size: 1+.2em;
   color: var(--primary);
 }
 .character-details p {
