@@ -49,8 +49,9 @@ header a {
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
 .character-details h4 {
+  font-weight: bolder;
   margin: 0 0 10px 0;
-  font-size: 1.2em;
+  font-size: 2.2em;
   color: var(--primary);
 }
 .character-details p {
