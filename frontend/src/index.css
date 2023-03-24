@@ -26,6 +26,8 @@ header a {
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(auto));
 }
 
 .home {
@@ -34,7 +36,10 @@ header a {
   gap: 100px;
 }
 .character-details {
-  display: flex;
+  /* height: 70vh; */
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(auto)); */
+  width: 30%;
   flex-direction: column;
   background: #fff;
   border-radius: 4px;
@@ -63,6 +68,23 @@ header a {
   border-radius: 50%;
   color: #333;
 }
+.character-img {
+  padding: 5px;
+  display: block;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+  /* border: 2px solid #ddd; */
+}
+
+.characters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 .create {
   margin: 20px 30px;
 }
@@ -110,3 +132,33 @@ div.error {
 input.error {
   border: 1px solid var(--error);
 }
+
+@media only screen and (max-width: 600px) {
+
+  .home {
+    flex-wrap: wrap;
+    gap: 20px
+  }
+
+  .character-details {
+    width: 75%;
+  }
+
+  .create {
+    width: 75%;
+    height: fit-content;
+  }
+
+  header {
+    justify-content: space-between;
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .character-details {
+    display: block;
+    height: auto;
+  }
+}
+
+

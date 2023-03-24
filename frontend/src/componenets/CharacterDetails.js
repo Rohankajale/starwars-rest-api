@@ -33,11 +33,6 @@ const CharacterDetails = ({ character }) => {
         <p><strong>HomeTown: </strong>{ character.hometown }</p>
         <p>{formatDistanceToNow(new Date(character.createdAt), { addSuffix: true })}</p>
         <img src = {`data:img/${img.contentType};base64,${base64String}`} alt = "character-img" className = "character-img"/>
-        <div>
-            {''}
-            {name}
-            {''}
-        </div>
         <span className="material-symbols-outlined" onClick={ handleClick }>delete</span>
         </div>
     )
