@@ -1,10 +1,10 @@
 import {useState} from 'react'
-import useCharactersContext from '../hooks/useCharactersContext'
+// import useCharactersContext from '../hooks/useCharactersContext'
 import useCreateCharacter from '../hooks/useCreateCharacter'
 
 
 const CharacterForm = () => {
-    const {dispatch} = useCharactersContext()
+    // const {dispatch} = useCharactersContext()
 
     const { error, isLoading, createCharacter } = useCreateCharacter()
 
@@ -13,7 +13,7 @@ const CharacterForm = () => {
     const [img, setImg] = useState(null)
     const [imgPath, setImgPath] = useState('')
     // const [error, setError] = useState(null)
-    const [emptyfields, setEmptyFields] = useState([])
+    const [emptyfields] = useState([])
 
 
     const handleSubmit = async (e) => {
@@ -29,7 +29,7 @@ const CharacterForm = () => {
         //     }
         // })
         const success = createCharacter(name, hometown, img)
-        // const json = await response.json()
+        // const json = await response.json() 
 
         if(success) {
             setName('')
