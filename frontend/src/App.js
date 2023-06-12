@@ -1,22 +1,84 @@
-import './App.css';
-
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+  SignIn,
+  SignUp,
+  UserButton,
+} from "@clerk/clerk-react";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import Home from "./pages/Home"
 import Navbar from './componenets/Navbar'
-import Home from './pages/Home';
+
+if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
+
+const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
+
+function PublicPage() {
+  return (
+    <>
+      <h1>SignIn</h1>
+      <a href="/protected">SignIn to continue to homepage</a>
+    </>
+  );
+}
+
+function ProtectedPage() {
+  return (
+    <>
+      <h1>Protected page</h1>
+      <UserButton />
+    </>
+  );
+}
+
+function ClerkProviderWithRoutes() {
+  const navigate = useNavigate();
+
+  return (
+    <ClerkProvider
+      publishableKey={clerkPubKey}
+      navigate={(to) => navigate(to)}
+    >
+      <Routes>
+        <Route path="/" element={<PublicPage />} />
+        <Route
+          path="/sign-in/*"
+          element={<><h1>Work</h1><SignIn routing="path" path="/sign-in" /></>}
+        />
+        <Route
+          path="/sign-up/*"
+          element={<SignUp routing="path" path="/sign-up" />}
+        />
+        <Route
+          path="/protected"
+          element={
+          <>
+            <SignedIn>
+              <UserButton></UserButton>
+              <Home />
+            </SignedIn>
+             <SignedOut>
+              <RedirectToSignIn />
+           </SignedOut>
+          </>
+          }
+        />
+      </Routes>
+    </ClerkProvider>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path = '/' element = {<Home />}></Route>
-        </Routes>
-      </Router>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <ClerkProviderWithRoutes />
+    </BrowserRouter>
   );
- }
-
+}
 
 export default App;
